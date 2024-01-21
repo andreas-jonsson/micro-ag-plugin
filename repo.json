@@ -1,0 +1,18 @@
+[
+    {
+        "Name": "ag",
+        "Description": "Adds support for searching in files using The Silver Searcher.",
+        "Website": "https://github.com/andreas-jonsson/micro-ag-plugin",
+        "Tags": ["ag"],
+        "Versions": [
+            {
+                "Version": "1.0.0",
+                "Url": "https://github.com/andreas-jonsson/micro-ag-plugin/archive/v1.0.0.zip",
+                "Require": {
+                    "micro": ">=1.1.2"
+                }
+            }
+        ]
+    }
+]
+
