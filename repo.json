@@ -9,7 +9,7 @@
                 "Version": "1.0.0",
                 "Url": "https://github.com/andreas-jonsson/micro-ag-plugin/archive/v1.0.0.zip",
                 "Require": {
-                    "micro": ">=1.1.2"
+                    "micro": ">=2.0.0"
                 }
             }
         ]
