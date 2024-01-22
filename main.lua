@@ -6,9 +6,25 @@ local shell = import("micro/shell")
 local config = import("micro/config")
 local buffer = import("micro/buffer")
 
+local function fzf(bp)
+    local output, err = shell.RunInteractiveShell("bash -c \"fzf --reverse\"", false, true)
+    if err ~= nil then
+        micro.InfoBar():Error(err)
+        return
+    end
+
+    output = strings.TrimSpace(output)
+    if output ~= "" then
+        local buf, err = buffer.NewBufferFromFile(output)
+        if err == nil then
+            bp:OpenBuffer(buf)
+        end
+    end
+end
+
 local function ag(bp, args)
     if #args < 1 then
-        micro.InfoBar():Error("Need something to search for!")
+        fzf(bp)
         return
     end
 
@@ -31,24 +47,7 @@ local function ag(bp, args)
     end
 end
 
-local function fzf(bp)
-    local output, err = shell.RunInteractiveShell("bash -c \"fzf --reverse\"", false, true)
-    if err ~= nil then
-        micro.InfoBar():Error(err)
-        return
-    end
-
-    output = strings.TrimSpace(output)
-    if output ~= "" then
-        local buf, err = buffer.NewBufferFromFile(output)
-        if err == nil then
-            bp:OpenBuffer(buf)
-        end
-    end
-end
-
 function init()
     config.MakeCommand("ag", ag, config.NoComplete)
-    config.MakeCommand("fzf", fzf, config.NoComplete)
-    config.TryBindKey("Ctrl-Alt-o", "command:fzf", true)
+    config.TryBindKey("Ctrl-Alt-f", "command:ag", true)
 end
