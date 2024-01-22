@@ -28,7 +28,7 @@ local function ag(bp, args)
         return
     end
 
-    local cmd = string.format("bash -c \"ag -Q -U --silent '%s' | fzf --reverse\"", args[1])
+    local cmd = string.format("bash -c \"ag -Q --silent '%s' | fzf --reverse\"", args[1])
     local output, err = shell.RunInteractiveShell(cmd, false, true)
     if err ~= nil then
         micro.InfoBar():Error(err)
