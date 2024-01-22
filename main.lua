@@ -7,7 +7,7 @@ local config = import("micro/config")
 local buffer = import("micro/buffer")
 
 local function fzf(bp)
-    local output, err = shell.RunInteractiveShell("bash -c \"fzf --reverse\"", false, true)
+    local output, err = shell.RunInteractiveShell("bash -c \"fzf -e --reverse\"", false, true)
     if err ~= nil then
         micro.InfoBar():Error(err)
         return
@@ -28,7 +28,7 @@ local function ag(bp, args)
         return
     end
 
-    local cmd = string.format("bash -c \"ag -Q --silent '%s' | fzf --reverse\"", args[1])
+    local cmd = string.format("bash -c \"ag -Q --silent '%s' | fzf -e --reverse\"", args[1])
     local output, err = shell.RunInteractiveShell(cmd, false, true)
     if err ~= nil then
         micro.InfoBar():Error(err)
